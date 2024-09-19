@@ -1,0 +1,21 @@
+services:
+  app:
+    build:
+      dockerfile: ./Dockerfile
+    container_name: "app"
+    command:
+      - "make"
+      - "run"
+    ports:
+      - "8001:8001"
+    restart: always
+    env_file:
+      - .env
+    networks:
+      -  selffastapi_mynet
+
+
+networks:
+   selffastapi_mynet:
+    driver: bridge
+    external: true
