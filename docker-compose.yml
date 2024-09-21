@@ -11,11 +11,33 @@ services:
     restart: always
     env_file:
       - .env
-    networks:
-      -  selffastapi_mynet
+#    networks:
+#      -  selffastapi_mynet
+
+    logging:
+      driver: loki
+      options:
+        loki-url: http://localhost:3100/loki/api/v1/push
 
 
-networks:
-   selffastapi_mynet:
-    driver: bridge
-    external: true
+  grafana:
+
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      - GF_AUTH_ANONYMOUS_ENABLED=true
+      - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    ports:
+      - "3000:3000"
+
+  loki:
+    container_name: loki
+    image: grafana/loki
+    ports:
+      - "3100:3100"
+
+
+#networks:
+#   selffastapi_mynet:
+#    driver: bridge
+#    external: true
