@@ -11,9 +11,6 @@ services:
     restart: always
     env_file:
       - .env
-#    networks:
-#      -  selffastapi_mynet
-
     logging:
       driver: loki
       options:
@@ -21,7 +18,6 @@ services:
 
 
   grafana:
-
     image: grafana/grafana
     container_name: grafana
     environment:
@@ -35,9 +31,3 @@ services:
     image: grafana/loki
     ports:
       - "3100:3100"
-
-
-#networks:
-#   selffastapi_mynet:
-#    driver: bridge
-#    external: true
